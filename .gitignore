@@ -23,3 +23,7 @@ credentials.dat
 .vscode/
 *sponge_log.xml
 .DS_store
+**/env/**
+*.mp3
+*.raw
+texttospeech/cloud-client/resources/*
