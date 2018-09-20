@@ -35,12 +35,15 @@ def synthesize_text_with_audio_profile(text, output, effects_profile_id):
 
     # Note: the voice can also be specified by name.
     # Names of voices can be retrieved with client.list_voices().
-    voice = texttospeech.types.VoiceSelectionParams(language_code='en-US')
+    voice = texttospeech.types.VoiceSelectionParams(language_code='en-US',name='en-US-Wavenet-D')
 
     # Note: you can pass in multiple effects_profile_id. They will be applied
     # in the same order they are provided.
     audio_config = texttospeech.types.AudioConfig(
-        audio_encoding=texttospeech.enums.AudioEncoding.MP3,
+        audio_encoding=texttospeech.enums.AudioEncoding.LINEAR16,
+        speaking_rate=1.0,
+        pitch=0,
+        sample_rate_hertz=24000,
         effects_profile_id=[effects_profile_id])
 
     response = client.synthesize_speech(input_text, voice, audio_config)
