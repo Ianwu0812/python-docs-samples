@@ -38,17 +38,20 @@ def synthesize_text_file(text_file):
     # Names of voices can be retrieved with client.list_voices().
     voice = texttospeech.types.VoiceSelectionParams(
         language_code='en-US',
-        ssml_gender=texttospeech.enums.SsmlVoiceGender.FEMALE)
+        name='en-US-Wavenet-D')
 
     audio_config = texttospeech.types.AudioConfig(
-        audio_encoding=texttospeech.enums.AudioEncoding.MP3)
+        audio_encoding=texttospeech.enums.AudioEncoding.LINEAR16,
+        speaking_rate=1.0,
+        pitch=0,
+        sample_rate_hertz=24000)
 
     response = client.synthesize_speech(input_text, voice, audio_config)
 
     # The response's audio_content is binary.
-    with open('output.mp3', 'wb') as out:
+    with open('output.raw', 'wb') as out:
         out.write(response.audio_content)
-        print('Audio content written to file "output.mp3"')
+        print('Audio content written to file "output.raw"')
 # [END tts_synthesize_text_file]
 
 
